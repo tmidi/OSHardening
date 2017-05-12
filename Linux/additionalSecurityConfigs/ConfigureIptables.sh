@@ -41,7 +41,7 @@ echo "Drop all NULL packets"
 /sbin/iptables -A INPUT -p tcp --tcp-flags ALL NONE -j DROP
 echo "Limiting pings to 1 per second"
 /sbin/iptables -N PACKET
-/sbin/iptables -A DEFAULT_RULES -p icmp -m limit --limit 3/sec --limit-burst 25 -j ACCEPT
+/sbin/iptables -A PACKET -p icmp -m limit --limit 3/sec --limit-burst 25 -j ACCEPT
 echo "Setup Connection Tracking"
 /sbin/iptables -N STATE_TRACK
 /sbin/iptables -A STATE_TRACK -m state --state RELATED,ESTABLISHED -j ACCEPT
